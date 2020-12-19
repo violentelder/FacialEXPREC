@@ -4,6 +4,7 @@ desc: 读取数据集
 from tqdm import tqdm
 import os
 import numpy as np
+from cv2 import cv2 
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 
 
@@ -52,7 +53,6 @@ class Fer2013(object):
         expressions = ['anger', 'disgust', 'fear', 'happy', 'sad', 'surprised', 'neutral', 'contempt']
         x_train = []
         y_train = []
-        import cv2
         for i in tqdm(range(len(expressions))):
             if expressions[i] == 'contempt':
                 continue
@@ -101,7 +101,6 @@ class Fer2013(object):
         expressions = ['anger', 'disgust', 'fear', 'happy', 'sad', 'surprised', 'neutral', 'contempt']
         x_train = []
         y_train = []
-        import cv2
         for i in tqdm(range(len(expressions))):
             if expressions[i] == 'contempt':
                 continue
@@ -150,7 +149,6 @@ class Fer2013(object):
         expressions = ['anger', 'disgust', 'fear', 'happy', 'sad', 'surprised', 'neutral', 'contempt']
         x_train = []
         y_train = []
-        import cv2
         for i in tqdm(range(len(expressions))):
             if expressions[i] == 'contempt':
                 continue
@@ -201,7 +199,6 @@ class Jaffe(object):
         产生训练数据
         :return:
         """
-        import cv2
         folder = os.path.join(self.folder, 'Training')
         expressions = ['anger', 'disgust', 'fear', 'happy', 'sad', 'surprised', 'neutral', 'contempt']
         x_train = []
@@ -267,7 +264,6 @@ class CK(object):
         产生训练数据
         :return:
         """
-        import cv2
         folder = self.folder
         # 为了模型训练统一，这里加入neural
         expressions = ['anger', 'disgust', 'fear', 'happy', 'sad', 'surprised', 'neutral', 'contempt']

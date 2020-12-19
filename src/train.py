@@ -13,12 +13,12 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 from data import Fer2013, Jaffe, CK
-from model import CNN3
+from model import CNN
 from visualize import plot_loss, plot_acc
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--dataset", type=str, default="fer2013", help="dataset to train, fer2013 or jaffe or ck+")
-parser.add_argument("--epochs", type=int, default=20)
+parser.add_argument("--dataset", type=str, default="ck+", help="dataset to train, fer2013 or jaffe or ck+")
+parser.add_argument("--epochs", type=int, default=100)
 parser.add_argument("--batch_size", type=int, default=32)
 parser.add_argument("--plot_history", type=bool, default=True)
 opt = parser.parse_args()
@@ -37,13 +37,13 @@ if opt.dataset == "fer2013":
     y_valid = np.hstack((y_valid, np.zeros((y_valid.shape[0], 1))))
     print("load fer2013 dataset successfully, it has {} train images and {} valid iamges".format(y_train.shape[0], y_valid.shape[0]))
 
-    model = CNN3(input_shape=(48, 48, 1), n_classes=8)
+    model = CNN(input_shape=(48, 48, 1), n_classes=8)
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
     callback = [
         #     EarlyStopping(monitor='val_loss', patience=50, verbose=True),
         #     ReduceLROnPlateau(monitor='lr', factor=0.1, patience=20, verbose=True),
-        ModelCheckpoint('../models/cnn2_best_weights.h5', monitor='val_acc', verbose=True, save_best_only=True,
+        ModelCheckpoint('../models/cnn_best_weights.h5', monitor='val_acc', verbose=True, save_best_only=True,
                         save_weights_only=True)]
 
     train_generator = ImageDataGenerator(rotation_range=10,
@@ -84,14 +84,14 @@ elif opt.dataset == "jaffe":
                                          zoom_range=0.2).flow(x_train, y_train, batch_size=opt.batch_size)
     valid_generator = ImageDataGenerator().flow(x_valid, y_valid, batch_size=opt.batch_size)
 
-    model = CNN3()
+    model = CNN()
 
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
     callback = [
         #     EarlyStopping(monitor='val_loss', patience=50, verbose=True),
         #     ReduceLROnPlateau(monitor='lr', factor=0.1, patience=15, verbose=True),
-        ModelCheckpoint('../models/cnn3_best_weights.h5', monitor='val_acc', verbose=True, save_best_only=True,
+        ModelCheckpoint('../models/cnn_best_weights.h5', monitor='val_acc', verbose=True, save_best_only=True,
                         save_weights_only=True)]
     history_jaffe = model.fit_generator(train_generator, steps_per_epoch=len(y_train) // opt.batch_size, epochs=opt.epochs,
                                         validation_data=valid_generator, validation_steps=len(y_valid) // opt.batch_size,
@@ -111,13 +111,13 @@ else:
                                          shear_range=0.2,
                                          zoom_range=0.2).flow(x_train, y_train, batch_size=opt.batch_size)
     valid_generator = ImageDataGenerator().flow(x_valid, y_valid, batch_size=opt.batch_size)
-    model = CNN3()
+    model = CNN()
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
     callback = [
         #     EarlyStopping(monitor='val_loss', patience=50, verbose=True),
         #     ReduceLROnPlateau(monitor='lr', factor=0.1, patience=15, verbose=True),
-        ModelCheckpoint('../models/cnn3_best_weights.h5', monitor='val_acc', verbose=True, save_best_only=True,
+        ModelCheckpoint('../models/cnn_best_weights.h5', monitor='val_acc', verbose=True, save_best_only=True,
                         save_weights_only=True)]
     history_ck = model.fit_generator(train_generator, steps_per_epoch=len(y_train) // opt.batch_size, epochs=opt.epochs,
                                      validation_data=valid_generator, validation_steps=len(y_valid) // opt.batch_size,

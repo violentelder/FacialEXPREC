@@ -2,7 +2,7 @@
 desc: 工具库
 """
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
-
+from cv2 import cv2 
 
 def get_fer2013_images():
     """
@@ -58,7 +58,6 @@ def get_jaffe_images():
     得到按照标签存放的目录结构的数据集同时对人脸进行检测
     :return:
     """
-    import cv2
     import os
     emotions = {
         'AN': 0,
@@ -196,7 +195,6 @@ def cv2_img_add_text(img, text, left, top, text_color=(0, 255, 0), text_size=20)
     :param text_size
     :return:
     """
-    import cv2
     import numpy as np
     from PIL import Image, ImageDraw, ImageFont
 
@@ -215,7 +213,6 @@ def get_faces_from_gray_image(img_path):
     :param img_path:
     :return:
     """
-    import cv2
     face_cascade = cv2.CascadeClassifier('./dataset/params/haarcascade_frontalface_alt.xml')
     img = cv2.imread(img_path)
 
@@ -262,8 +259,8 @@ def get_feature_map(model, layer_index, channels, input_img=None):
 
 
 if __name__ == '__main__':
-    from model import CNN3
-    model = CNN3()
-    model.load_weights('../models/cnn3_best_weights.h5')
+    from model import CNN
+    model = CNN()
+    model.load_weights('../models/cnn_best_weights.h5')
     get_feature_map(model, 1, 32)
 

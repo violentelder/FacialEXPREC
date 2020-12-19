@@ -5,9 +5,8 @@ from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dropout, BatchN
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import PReLU
 
-def CNN3(input_shape=(48, 48, 1), n_classes=8):
+def CNN(input_shape=(48, 48, 1), n_classes=8):
     """
-    参考论文实现
     A Compact Deep Learning Model for Robust Facial Expression Recognition
     :param input_shape:
     :param n_classes:

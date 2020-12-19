@@ -90,7 +90,7 @@ def predict_expression(img_path, model):
 
 
 if __name__ == '__main__':
-    from model import CNN3
-    model = CNN3()
-    model.load_weights('../models/cnn3_best_model_weights.h5')
+    from model import CNN
+    model = CNN()
+    model.load_weights('../models/cnn_best_model_weights.h5')
     predict_expression('../data/test/happy2.png', model)

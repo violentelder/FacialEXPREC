@@ -17,9 +17,9 @@ def load_cnn_model():
     载入CNN模型
     :return:
     """
-    from model import CNN3
-    model = CNN3()
-    model.load_weights('./models/cnn3_best_weights.h5')
+    from model import CNN
+    model = CNN()
+    model.load_weights('./models/cnn_best_weights.h5')
     return model
 
 

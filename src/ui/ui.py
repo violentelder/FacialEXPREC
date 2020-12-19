@@ -1,4 +1,4 @@
-import cv2
+from cv2 import cv2 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -29,13 +29,6 @@ class UI(object):
         self.line1.setFrameShape(QtWidgets.QFrame.VLine)
         self.line1.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line1.setObjectName("line1")
-        # 作者说明label
-        self.label_designer = QtWidgets.QLabel(form)
-        self.label_designer.setGeometry(QtCore.QRect(20, 700, 180, 40))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.label_designer.setFont(font)
-        self.label_designer.setObjectName("label_designer")
         # 结果布局设置
         self.layout_widget = QtWidgets.QWidget(form)
         self.layout_widget.setGeometry(QtCore.QRect(10, 310, 320, 240))
@@ -138,7 +131,6 @@ class UI(object):
         :param img_path:
         :return:
         """
-        import cv2
         face_cascade = cv2.CascadeClassifier('../data/params/haarcascade_frontalface_alt.xml')
         img = cv2.imread(img_path)
 

@@ -17,8 +17,8 @@ from model import CNN
 from visualize import plot_loss, plot_acc
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--dataset", type=str, default="ck+", help="dataset to train, fer2013 or jaffe or ck+")
-parser.add_argument("--epochs", type=int, default=100)
+parser.add_argument("--dataset", type=str, default="jaffe", help="dataset to train, fer2013 or jaffe or ck+")
+parser.add_argument("--epochs", type=int, default=300)
 parser.add_argument("--batch_size", type=int, default=32)
 parser.add_argument("--plot_history", type=bool, default=True)
 opt = parser.parse_args()
@@ -64,7 +64,7 @@ if opt.dataset == "fer2013":
     # test
     pred = model.predict(x_test)
     pred = np.argmax(pred, axis=1)
-    print("test accuacy", np.sum(pred.reshape(-1) == y_test.reshape(-1)) / y_test.shape[0])
+    print("Test Accuacy", np.sum(pred.reshape(-1) == y_test.reshape(-1)) / y_test.shape[0])
 
 elif opt.dataset == "jaffe":
     expressions, x, y = Jaffe().gen_train()

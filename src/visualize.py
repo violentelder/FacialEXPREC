@@ -29,12 +29,11 @@ def plot_loss(his, ds):
     plt.plot(np.arange(len(his['val_loss'])), his['val_loss'], label='valid loss')
     plt.title(ds + ' Training Loss')
     plt.legend(loc='best')
-    plt.savefig('./assets/his_loss.png')
+    plt.savefig('./assets/' + ds + '_loss.png')
 
 
 def plot_acc(his, ds):
     """
-
     :param his:
     :return:
     """
@@ -44,7 +43,7 @@ def plot_acc(his, ds):
     plt.plot(np.arange(len(his['val_accuracy'])), his['val_accuracy'], label='valid accuracy')
     plt.title(ds + ' Training Accuracy')
     plt.legend(loc='best')
-    plt.savefig('./assets/his_acc.png')
+    plt.savefig('./assets/' + ds + '_acc.png')
 
 
 def plot_feature_map():

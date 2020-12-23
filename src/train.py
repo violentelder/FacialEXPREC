@@ -17,7 +17,7 @@ from model import CNN
 from visualize import plot_loss, plot_acc
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--dataset", type=str, default="jaffe", help="dataset to train, fer2013 or jaffe or ck+")
+parser.add_argument("--dataset", type=str, default="fer2013", help="dataset to train, fer2013 or jaffe or ck+")
 parser.add_argument("--epochs", type=int, default=300)
 parser.add_argument("--batch_size", type=int, default=32)
 parser.add_argument("--plot_history", type=bool, default=True)
